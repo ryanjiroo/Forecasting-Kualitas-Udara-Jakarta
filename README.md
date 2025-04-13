@@ -127,19 +127,60 @@ Dataset yang digunakan dalam proyek ini adalah **Air Quality Index in Jakarta**,
 Beberapa teknik eksplorasi data dan visualisasi yang dilakukan untuk memahami karakteristik data:
 
 1. **Distribusi Data**
-   - Visualisasi histogram dan boxplot digunakan untuk melihat distribusi fitur numerik dan mengidentifikasi outlier.
+
+   ![Distribusi Data](images/DistribusiFitur.png)
+   - Mayoritas fitur numerik memiliki distribusi tidak normal (right-skewed).
 
 2. **Visualisasi Missing Values**
-   - Menggunakan heatmap (dengan library seaborn) untuk melihat distribusi missing values di berbagai kolom.
+![Distribusi Data](images/ms.png)
+   - Ditemukan beberapa kolom yang masih mengandung missing value.
+   - `pm25` menjadi kolom dengan missing value terbanyak.
 
 3. **Analisis Korelasi**
-   - Korelasi antar fitur numerik divisualisasikan menggunakan heatmap korelasi (Pearson correlation matrix).
 
-4. **Tren Musiman**
-   - Visualisasi tren kualitas udara berdasarkan waktu (harian, bulanan, tahunan) menggunakan plot time-series.
+   ![Distribusi Data](images/Korelasi.png)
+   - Terlihat Korelasi antar fitur sangat kuat
 
-5. **Perbandingan Antar Stasiun**
-   - Rata-rata nilai polutan pada tiap stasiun dibandingkan menggunakan bar chart untuk melihat perbedaan antar lokasi pemantauan.
+4. **Tren Harian PM10, PM2.5, dan CO**
+   ![Distribusi Data](images/TrenHarian.png)
+   - Nilai yang tinggi mengindikasikan potensi kualitas udara yang buruk dan berdampak pada kesehatan.  Analisis lebih lanjut diperlukan untuk mengidentifikasi pola musiman, penyebab lonjakan nilai polutan, dan hubungan antar polutan.
+
+5. **Rata-rata Konsentrasi PM10 dan PM2.5 per Bulan**
+   ![Distribusi Data](images/TrenHarian.png)
+   - Pada setiap bulan, terdapat dua batang yang mewakili rata-rata konsentrasi PM10 dan PM2.5.  Perhatikan perbedaan tinggi antara batang PM10 dan PM2.5 untuk melihat perbedaan rata-rata konsentrasi kedua jenis partikel tersebut pada setiap bulan.
+
+6. **Tren Harian PM10, PM2.5, dan CO**
+   ![Distribusi Data](images/RataKonsentrasi.png)
+   - Nilai yang tinggi mengindikasikan potensi kualitas udara yang buruk dan berdampak pada kesehatan.  Analisis lebih lanjut diperlukan untuk mengidentifikasi pola musiman, penyebab lonjakan nilai polutan, dan hubungan antar polutan.
+
+7. **Rata-rata Konsentrasi Polutan per Stasiun**
+   ![Distribusi Data](images/Perstasiun.png)
+   - Stasiun dengan batang yang lebih tinggi pada beberapa polutan menunjukkan potensi kualitas udara yang lebih buruk di wilayah tersebut.
+
+8. **Rata-rata Konsentrasi Polutan per Stasiun**
+   ![Distribusi Data](images/Sebaran-nilaiPM10.png)
+   - Stasiun dengan median dan IQR yang tinggi menunjukkan potensi masalah kualitas udara yang lebih signifikan di wilayah tersebut.  Identifikasi stasiun dengan *outlier* yang banyak perlu ditindaklanjuti untuk mengetahui penyebabnya dan potensi dampak kesehatan.
+
+9. **Proporsi Kategori Kualitas Udara**
+   ![Distribusi Data](images/Proporsi-kategori-kualitas-udara.png)
+   - Kategori mana yang paling dominan? Sedang
+   - Apakah ada kategori yang jarang muncul? Sangat Tidak Sehat
+   - Bagaimana distribusi kualitas udara secara umum? Sedikit tidak merata
+
+10. **Sebaran Nilai Max Berdasarkan Kategori Kualitas Udara**
+   ![Distribusi Data](images/Sebaranmax.png)
+    - Setiap kotak pada boxplot merepresentasikan satu kategori kualitas udara (misalnya: BAIK, SEDANG, TIDAK SEHAT, dll.).
+    - Garis tengah di dalam setiap kotak adalah median dari nilai 'max' untuk kategori tersebut.  
+    - Batas atas dan bawah kotak menunjukkan kuartil pertama (Q1) dan kuartil ketiga (Q3) dari nilai 'max'.  
+    - Garis-garis di atas dan bawah kotak (disebut *whiskers*) menunjukkan jangkauan data yang masih dianggap normal. Data di luar *whisker* adalah outlier.
+
+11. **Frekuensi Polutan yang Menjadi Parameter Kritis**
+   ![Distribusi Data](images/Frekuensipolutan.png)
+    - Polutan dengan batang tertinggi adalah polutan yang paling sering menjadi penyebab utama penurunan kualitas udara dalam dataset.  Ini mengindikasikan bahwa polutan tersebut perlu menjadi fokus utama dalam upaya pengendalian polusi udara.  Perbandingan tinggi batang antar polutan memberikan gambaran tentang kontribusi relatif masing-masing polutan terhadap kualitas udara yang buruk. Misalnya, jika PM2.5 memiliki batang tertinggi, itu menunjukkan bahwa PM2.5 paling sering menjadi polutan dominan yang menyebabkan kualitas udara buruk.
+
+12. **Rata-rata Nilai Max Berdasarkan Polutan Kritis**
+   ![Distribusi Data](images/RataMax.png)
+    - Perhatikan bahwa meskipun suatu polutan mungkin sering menjadi parameter kritis (seperti yang ditunjukkan pada grafik sebelumnya),  rata-rata nilai maksimumnya belum tentu yang tertinggi.  Ini menunjukkan bahwa frekuensi dan tingkat keparahan polutan perlu dipertimbangkan bersama-sama dalam menentukan strategi pengendalian polusi.
 
 > EDA membantu dalam memahami pola umum, mengidentifikasi anomali, dan memberikan wawasan awal untuk proses modeling.
 
@@ -151,8 +192,18 @@ Beberapa teknik eksplorasi data dan visualisasi yang dilakukan untuk memahami ka
 Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemodelan. Setiap langkah dirancang agar data menjadi bersih, konsisten, dan siap digunakan oleh algoritma machine learning.
 
 ---
+### 1. Konversi Tipe Data
 
-### 1. Penanganan Missing Values
+**Langkah yang dilakukan:**
+- Kolom `tanggal` yang awalnya bertipe *object* dikonversi menjadi tipe *datetime* menggunakan `pd.to_datetime()`.
+
+**Alasan:**
+- Tipe data datetime memungkinkan analisis berbasis waktu, seperti ekstraksi fitur waktu (hari, bulan, tahun, dll).
+- Format waktu yang benar penting untuk menjaga urutan kronologis data, terutama karena model melakukan prediksi berdasarkan urutan waktu (time-series).
+
+---
+
+### 2. Penanganan Missing Values
 
 **Langkah yang dilakukan:**
 - Untuk fitur numerik (`pm10`, `so2`, `co`, `o3`, `no2`, `max`), digunakan teknik **linear interpolation** untuk mengisi nilai hilang.
@@ -168,7 +219,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 2. Penanganan Outliers
+### 3. Penanganan Outliers
 
 **Langkah yang dilakukan:**
 - Outlier diidentifikasi dan dihapus menggunakan metode **Interquartile Range (IQR)** pada masing-masing fitur numerik.
@@ -180,7 +231,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 3. Encoding Fitur Kategorikal
+### 4. Encoding Fitur Kategorikal
 
 **Langkah yang dilakukan:**
 - Fitur kategorikal `stasiun`, `critical`, dan `categori` dikonversi menjadi angka menggunakan **Label Encoding**.
@@ -193,7 +244,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 4. Feature Scaling
+### 5. Feature Scaling
 
 **Langkah yang dilakukan:**
 - Standarisasi fitur numerik dilakukan menggunakan **StandardScaler** dari `sklearn`.
@@ -204,7 +255,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 5. Penyimpanan Data
+### 6. Penyimpanan Data
 
 **Langkah yang dilakukan:**
 - Dataset hasil preprocessing disimpan dalam file `polutan.csv` untuk digunakan pada tahap selanjutnya.
@@ -212,6 +263,12 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 **Alasan:**
 - Menyimpan data preprocessing memungkinkan proses inference dan deployment dilakukan secara konsisten di masa depan tanpa mengulang preprocessing dari awal.
+
+### 7. Split Data Training dan Testing
+
+**Langkah yang dilakukan:**
+- Data dibagi menjadi data latih dan data uji menggunakan `train_test_split()` dari `sklearn.model_selection`.
+- Parameter `shuffle=False` digunakan untuk menjaga urutan data karena ini adalah masalah time-series.
 
 ---
 
@@ -277,6 +334,8 @@ Setelah dilakukan evaluasi menggunakan metrik regresi (MAE, MSE, RMSE, dan R²),
 
 ## Evaluation
 
+Proyek ini bermula dari kebutuhan mendesak akan sistem prediksi kualitas udara di Jakarta sebagai respons terhadap tingginya risiko kesehatan akibat polusi, terutama bagi kelompok rentan dan dalam rangka mendukung kebijakan berbasis data. Sejalan dengan problem statement yang telah dijabarkan, model prediktif yang akurat diharapkan dapat mengisi kekosongan sistem peringatan dini dan membantu perencanaan jangka pendek hingga panjang terkait kualitas udara.
+
 Berikut adalah hasil evaluasi kinerja model **Random Forest** dan **Support Vector Regression (SVR)** dalam memprediksi kadar polutan udara berdasarkan empat metrik evaluasi utama: **MAE, MSE, RMSE, dan R²**.
 
 
@@ -340,6 +399,16 @@ Berdasarkan hasil evaluasi, model **Support Vector Regression (SVR)** memiliki p
 
 ---
 
+### Integrasi Hasil dengan Business Understanding
+
+| Aspek                | Penjelasan |
+|----------------------|------------|
+| **Problem Statement** | Permasalahan utama adalah belum adanya sistem prediksi kualitas udara yang akurat di Jakarta. Dengan hasil R² yang tinggi pada model SVR, solusi ini menjawab kebutuhan akan sistem prediksi yang dapat diandalkan untuk *next-day* hingga *long-term forecast*. |
+| **Goals**             | Tujuan untuk memprediksi konsentrasi lima polutan utama (PM₁₀, SO₂, CO, O₃, dan NO₂) telah tercapai, dibuktikan dengan hasil evaluasi menggunakan MAE, MSE, RMSE, dan R². Model SVR menunjukkan akurasi yang tinggi dan konsistensi performa di semua target. |
+| **Solution Statement**| SVR yang dibungkus dengan `MultiOutputRegressor` terbukti efektif dalam menangani prediksi multi-target. Performanya melampaui baseline Random Forest, menjadikannya solusi layak untuk diimplementasikan dalam sistem peringatan dini kualitas udara berbasis data di Jakarta. |
+
+---
+
 ### Pertimbangan Lanjutan
 
 - Mencoba algoritma lain seperti **Gradient Boosting**, **XGBoost**, atau **LightGBM**.
@@ -347,5 +416,3 @@ Berdasarkan hasil evaluasi, model **Support Vector Regression (SVR)** memiliki p
 - Menambahkan fitur seperti data **cuaca** atau **lokasi geografis**.
 - Menggunakan **cross-validation** untuk mengurangi risiko overfitting.
 - Menganalisis **residual error** untuk melihat pola bias model.
-
-
