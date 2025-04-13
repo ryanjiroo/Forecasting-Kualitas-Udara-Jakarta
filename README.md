@@ -240,8 +240,6 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 - Algoritma machine learning memerlukan input numerik.
 - Label Encoding digunakan karena jumlah kategori relatif kecil dan encoding ini sederhana serta efisien.
 
-> ⚠️ Catatan: Label Encoding menciptakan urutan numerik yang bisa berdampak pada model tertentu. Perlu dipertimbangkan untuk menggunakan One-Hot Encoding jika model sensitif terhadap hubungan ordinal.
-
 ---
 
 ### 5. Feature Scaling
