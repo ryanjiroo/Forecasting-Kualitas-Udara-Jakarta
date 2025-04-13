@@ -146,39 +146,35 @@ Beberapa teknik eksplorasi data dan visualisasi yang dilakukan untuk memahami ka
    - Nilai yang tinggi mengindikasikan potensi kualitas udara yang buruk dan berdampak pada kesehatan.  Analisis lebih lanjut diperlukan untuk mengidentifikasi pola musiman, penyebab lonjakan nilai polutan, dan hubungan antar polutan.
 
 5. **Rata-rata Konsentrasi PM10 dan PM2.5 per Bulan**
-   ![Distribusi Data](images/TrenHarian.png)
+   ![Distribusi Data](images/RataKonsentrasi.png)
    - Pada setiap bulan, terdapat dua batang yang mewakili rata-rata konsentrasi PM10 dan PM2.5.  Perhatikan perbedaan tinggi antara batang PM10 dan PM2.5 untuk melihat perbedaan rata-rata konsentrasi kedua jenis partikel tersebut pada setiap bulan.
 
-6. **Tren Harian PM10, PM2.5, dan CO**
-   ![Distribusi Data](images/RataKonsentrasi.png)
-   - Nilai yang tinggi mengindikasikan potensi kualitas udara yang buruk dan berdampak pada kesehatan.  Analisis lebih lanjut diperlukan untuk mengidentifikasi pola musiman, penyebab lonjakan nilai polutan, dan hubungan antar polutan.
-
-7. **Rata-rata Konsentrasi Polutan per Stasiun**
+6. **Rata-rata Konsentrasi Polutan per Stasiun**
    ![Distribusi Data](images/Perstasiun.png)
    - Stasiun dengan batang yang lebih tinggi pada beberapa polutan menunjukkan potensi kualitas udara yang lebih buruk di wilayah tersebut.
 
-8. **Rata-rata Konsentrasi Polutan per Stasiun**
+7. **Rata-rata Konsentrasi Polutan per Stasiun**
    ![Distribusi Data](images/Sebaran-nilaiPM10.png)
    - Stasiun dengan median dan IQR yang tinggi menunjukkan potensi masalah kualitas udara yang lebih signifikan di wilayah tersebut.  Identifikasi stasiun dengan *outlier* yang banyak perlu ditindaklanjuti untuk mengetahui penyebabnya dan potensi dampak kesehatan.
 
-9. **Proporsi Kategori Kualitas Udara**
+8. **Proporsi Kategori Kualitas Udara**
    ![Distribusi Data](images/Proporsi-kategori-kualitas-udara.png)
    - Kategori mana yang paling dominan? Sedang
    - Apakah ada kategori yang jarang muncul? Sangat Tidak Sehat
    - Bagaimana distribusi kualitas udara secara umum? Sedikit tidak merata
 
-10. **Sebaran Nilai Max Berdasarkan Kategori Kualitas Udara**
+9. **Sebaran Nilai Max Berdasarkan Kategori Kualitas Udara**
    ![Distribusi Data](images/Sebaranmax.png)
     - Setiap kotak pada boxplot merepresentasikan satu kategori kualitas udara (misalnya: BAIK, SEDANG, TIDAK SEHAT, dll.).
     - Garis tengah di dalam setiap kotak adalah median dari nilai 'max' untuk kategori tersebut.  
     - Batas atas dan bawah kotak menunjukkan kuartil pertama (Q1) dan kuartil ketiga (Q3) dari nilai 'max'.  
     - Garis-garis di atas dan bawah kotak (disebut *whiskers*) menunjukkan jangkauan data yang masih dianggap normal. Data di luar *whisker* adalah outlier.
 
-11. **Frekuensi Polutan yang Menjadi Parameter Kritis**
+10. **Frekuensi Polutan yang Menjadi Parameter Kritis**
    ![Distribusi Data](images/Frekuensipolutan.png)
     - Polutan dengan batang tertinggi adalah polutan yang paling sering menjadi penyebab utama penurunan kualitas udara dalam dataset.  Ini mengindikasikan bahwa polutan tersebut perlu menjadi fokus utama dalam upaya pengendalian polusi udara.  Perbandingan tinggi batang antar polutan memberikan gambaran tentang kontribusi relatif masing-masing polutan terhadap kualitas udara yang buruk. Misalnya, jika PM2.5 memiliki batang tertinggi, itu menunjukkan bahwa PM2.5 paling sering menjadi polutan dominan yang menyebabkan kualitas udara buruk.
 
-12. **Rata-rata Nilai Max Berdasarkan Polutan Kritis**
+11. **Rata-rata Nilai Max Berdasarkan Polutan Kritis**
    ![Distribusi Data](images/RataMax.png)
     - Perhatikan bahwa meskipun suatu polutan mungkin sering menjadi parameter kritis (seperti yang ditunjukkan pada grafik sebelumnya),  rata-rata nilai maksimumnya belum tentu yang tertinggi.  Ini menunjukkan bahwa frekuensi dan tingkat keparahan polutan perlu dipertimbangkan bersama-sama dalam menentukan strategi pengendalian polusi.
 
