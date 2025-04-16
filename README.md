@@ -199,7 +199,18 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 2. Penanganan Missing Values
+### 2. Penghapusan Kolom
+
+**Langkah yang dilakukan:**
+- Menghapus kolom `bulan` dan  `nama_bulan`.
+
+**Alasan:**
+- Kolom tersebut terbentuk pada saat proses EDA dan hanya digunakan untuk proses EDA.
+- Tidak dibutuhkan untuk proses pelatihan.
+
+---
+
+### 3. Penanganan Missing Values
 
 **Langkah yang dilakukan:**
 - Untuk fitur numerik (`pm10`, `so2`, `co`, `o3`, `no2`, `max`), digunakan teknik **linear interpolation** untuk mengisi nilai hilang.
@@ -215,7 +226,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 3. Penanganan Outliers
+### 4. Penanganan Outliers
 
 **Langkah yang dilakukan:**
 - Outlier diidentifikasi dan dihapus menggunakan metode **Interquartile Range (IQR)** pada masing-masing fitur numerik.
@@ -227,7 +238,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 4. Encoding Fitur Kategorikal
+### 5. Encoding Fitur Kategorikal
 
 **Langkah yang dilakukan:**
 - Fitur kategorikal `stasiun`, `critical`, dan `categori` dikonversi menjadi angka menggunakan **Label Encoding**.
@@ -238,7 +249,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 5. Feature Scaling
+### 6. Feature Scaling
 
 **Langkah yang dilakukan:**
 - Standarisasi fitur numerik dilakukan menggunakan **StandardScaler** dari `sklearn`.
@@ -249,7 +260,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 
 ---
 
-### 6. Penyimpanan Data
+### 7. Penyimpanan Data
 
 **Langkah yang dilakukan:**
 - Dataset hasil preprocessing disimpan dalam file `polutan.csv` untuk digunakan pada tahap selanjutnya.
@@ -258,7 +269,7 @@ Tahapan berikut dilakukan untuk mempersiapkan data sebelum dilakukan proses pemo
 **Alasan:**
 - Menyimpan data preprocessing memungkinkan proses inference dan deployment dilakukan secara konsisten di masa depan tanpa mengulang preprocessing dari awal.
 
-### 7. Split Data Training dan Testing
+### 8. Split Data Training dan Testing
 
 **Langkah yang dilakukan:**
 - Data dibagi menjadi data latih dan data uji menggunakan `train_test_split()` dari `sklearn.model_selection`.
